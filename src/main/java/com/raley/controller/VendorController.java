@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.raley.model.ApiResponse;
+import com.raley.model.ResetPasswordDto;
 import com.raley.model.User;
 import com.raley.model.UserDto;
+import com.raley.service.ResetPasswordService;
 import com.raley.service.UserService;
 
 /**
@@ -27,7 +29,8 @@ public class VendorController {
 
 	@Autowired
 	private UserService userService;
-
+	@Autowired
+	private ResetPasswordService resetPasswordService;
 	public VendorController(UserService userService) {
 		super();
 		this.userService = userService;
@@ -43,5 +46,15 @@ public class VendorController {
 			return new ApiResponse<>(HttpStatus.OK.value(), "Vendor saved successfully.", userService.save(user));
 		}
 	}
-
+	
+	@PostMapping("/resetPassword")
+	public ApiResponse<Object> reset(@RequestBody ResetPasswordDto resetPassword) {
+		logger.info("find the email : "+resetPassword.getEmail()+ " for reset the password");
+		if (userService.findOne(resetPassword.getEmail()) == null) {
+			return new ApiResponse<>(HttpStatus.BAD_REQUEST.value(), "Email not exist.!", null);
+		} else {
+			return new ApiResponse<>(HttpStatus.OK.value(), "Password  reset successfully.",
+					resetPasswordService.reset(resetPassword.getEmail()).getEmail());
+		}
+	}
 }

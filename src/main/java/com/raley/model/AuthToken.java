@@ -11,7 +11,7 @@ public class AuthToken {
 	private String email;
 	private String firstName;
 	private String lastName;
-	private long mobile;
+	private long mobileNo;
 	private int pin;
 	private String country;
 	private String state;
@@ -24,12 +24,12 @@ public class AuthToken {
 
 	}
 
-	public AuthToken(String token, int id, String email, long mobile, String firstName, String lastName, int pin,
+	public AuthToken(String token, int id, String email, long mobileNo, String firstName, String lastName, int pin,
 			String country, String state, String city, String dept, String addrLand1, String addrLand2) {
 		this.token = token;
 		this.id = id;
 		this.email = email;
-		this.mobile = mobile;
+		this.mobileNo = mobileNo;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.pin = pin;
@@ -85,12 +85,12 @@ public class AuthToken {
 		this.lastName = lastName;
 	}
 
-	public long getMobile() {
-		return mobile;
+	public long getMobileNo() {
+		return mobileNo;
 	}
 
-	public void setMobile(long mobile) {
-		this.mobile = mobile;
+	public void setMobileNo(long mobileNo) {
+		this.mobileNo = mobileNo;
 	}
 
 	public int getPin() {
